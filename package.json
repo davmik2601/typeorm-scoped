@@ -2,7 +2,7 @@
   "name": "typeorm-scoped",
   "version": "1.0.0",
   "license": "ISC",
-  "description": "TypeORM extension which adds scopes to entities and repositories.",
+  "description": "TypeORM extension which adds scopes and default scopes to entities and repositories.",
   "scripts": {
     "dev": "nodemon -w 'src/**/*' --ignore 'src/**/*.spec.ts' -e ts -x 'yarn build'",
     "build": "rimraf dist && tsc",
