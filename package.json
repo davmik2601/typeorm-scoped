@@ -1,0 +1,65 @@
+{
+  "name": "typeorm-scoped",
+  "version": "1.0.0",
+  "license": "ISC",
+  "description": "TypeORM extension which adds scopes to entities and repositories.",
+  "scripts": {
+    "dev": "nodemon -w 'src/**/*' --ignore 'src/**/*.spec.ts' -e ts -x 'yarn build'",
+    "build": "rimraf dist && tsc",
+    "prepublish": "yarn build"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davmik2601/typeorm-scoped.git"
+  },
+  "keywords": [
+    "typeorm",
+    "scope",
+    "scoped",
+    "scopes",
+    "default-scopes"
+  ],
+  "author": {
+    "name": "David Mikayelyan",
+    "email": "davmik2601@gmail.com"
+  },
+  "files": [
+    "dist/**",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "@types/node": "^16.0.0",
+    "babel-jest": "^27.0.0",
+    "babel-plugin-transform-typescript-metadata": "^0.3.0",
+    "core-js": "^3.4.8",
+    "jest": "^27.0.0",
+    "nodemon": "^2.0.1",
+    "pg": "^8.0.0",
+    "prettier": "^2.0.1",
+    "typeorm": "^0.2.45",
+    "typescript": "^4.0.2"
+  },
+  "peerDependencies": {
+    "typeorm": "^0.2.45"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "watchPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ]
+  }
+}
