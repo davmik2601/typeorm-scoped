@@ -1,4 +1,4 @@
-import { SelectQueryBuilder } from 'typeorm';
+import {Repository, SelectQueryBuilder} from 'typeorm';
 import { GET_QUERY_COPY, SelectQB } from './select-qb';
 
 export const patchSelectQueryBuilder = (): void => {
@@ -17,4 +17,10 @@ export const patchSelectQueryBuilder = (): void => {
       ) as PropertyDescriptor,
     );
   }
+
+  Repository.prototype.scopedTest = function() {
+    // your implementation here
+    // for example, return all entities
+    return this;
+  };
 };
