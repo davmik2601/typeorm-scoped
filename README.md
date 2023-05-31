@@ -27,7 +27,7 @@ patchSelectQueryBuilder()  // <-- call this function
 const app = new Koa() // or const app = express() ...
 ```
 
-In `NestJS` You can call this function in `main.ts`, in `bootstrap()` function before creating app.
+In `NestJS` you can call this function in `main.ts`, in `bootstrap()` function before creating app.
 
 ```typescript
 import { patchSelectQueryBuilder } from 'typeorm-scoped'
@@ -41,7 +41,7 @@ async function bootstrap() {
 
 ## Default Scopes
 
-You can define a default scope(scopes) for an entity adding the `@DefaultScopes({ ... })` decorator before the `@Entity()`.
+you can define a default scope(scopes) for an entity adding the `@DefaultScopes({ ... })` decorator before the `@Entity()`.
 
 ```typescript
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm"
@@ -101,7 +101,7 @@ import {ScopeEntity} from "./scope.entity";
   adultUsers: (qb, alias) => qb.andWhere(`${alias}.age > :adultAge`, {adultAge: 17}),
   ...
 })
-// You can also use @Scopes(...) @DefaultScopes(...) together !
+// You can also use @Scopes(...) and @DefaultScopes(...) together !
 @Entity()
 export class User extends ScopeEntity {
   @PrimaryGeneratedColumn()
@@ -123,8 +123,9 @@ export class User extends ScopeEntity {
 
 ### Data Mapper (Repository) Pattern
 
-If You use `Data Mapper(Repository)` pattern, then for custom scopes You should `extend` from `ScopeRepository` (if you use Custom Repositories):
+If you use `Data Mapper(Repository)` pattern, then for custom scopes you should use Custom Repositories, which should be `extends` from `ScopeRepository`:
 
+#### Typeorm version 2.x
 ```typescript
 @EntityRepository(User)
 export class UserRepository extends ScopeRepository<User> { // <-- our ScopeRepository already extends from Repository<Entity>
@@ -132,9 +133,33 @@ export class UserRepository extends ScopeRepository<User> { // <-- our ScopeRepo
 }
 ```
 
+#### Typeorm version 3.x
+```typescript
+// @Injectable()  // <-- If you use NestJS
+export class UserRepository extends ScopeRepository<User> {
+  constructor(private dataSource: DataSource) {
+    super(User, dataSource.createEntityManager());
+  }
+}
+```
+
+##### For NestJS
+In NestJS you will add `@Injectable()` on your custom repository `UserRepository`.
+And then add it in your `UserModule` (if typeorm v2.x -> add into TypeOrmModule.forFeature function, if typeorm v3.x, add into providers).
+After that don't forget to add in services Inject Repository:
+
+```typescript
+constructor(
+  ...
+  @InjectRepository(UserRepository)
+  private readonly userRepository: UserRepository
+) {}
+```
+
+
 ### Active Record Pattern
 
-If You use `Active Record` pattern, You need to extend from `ScopeEntity`:
+If you use `Active Record` pattern, you need to extend from `ScopeEntity`:
 
 ```typescript
 @Scopes<User>({ 
