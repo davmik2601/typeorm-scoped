@@ -54,13 +54,13 @@ import { Scopes, DefaultScopes } from "typeorm-scoped"
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-	id: number
+  id: number
 
-	@Column()
-	name: string
+  @Column()
+  name: string
 
-	@Column()
-	deletedAt?: Date
+  @Column()
+  deletedAt?: Date
 }
 ```
 
@@ -103,20 +103,20 @@ import { Scopes, DefaultScopes } from "typeorm-scoped"
 // You can also use @Scopes(...) @DefaultScopes(...) together !
 @Entity()
 export class User {
-	@PrimaryGeneratedColumn()
-	id: number
+  @PrimaryGeneratedColumn()
+  id: number
 
-	@Column()
-	name: string
- 
-	@Column()
-	age: number
+  @Column()
+  name: string
 
-	@Column()
-	gender: string // or GenderEnum -> "Male", "Female", ...
+  @Column()
+  age: number
 
-	@Column()
-	deletedAt?: Date
+  @Column()
+  gender: string // or GenderEnum -> "Male", "Female", ...
+
+  @Column()
+  deletedAt?: Date
 }
 ```
 
