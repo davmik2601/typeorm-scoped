@@ -144,7 +144,7 @@ export class UserRepository extends ScopeRepository<User> {
 ```
 
 #### For NestJS
-__Important !__ In NestJS you will add `@Injectable()` on your custom repository `UserRepository`.
+__*Important!*__*** &nbsp;&nbsp In NestJS you will add `@Injectable()` on your custom repository `UserRepository`.
 And then add it in your `UserModule` (if typeorm v2.x -> add into TypeOrmModule.forFeature function, if typeorm v3.x, add into providers).
 After that use it in services:
 
