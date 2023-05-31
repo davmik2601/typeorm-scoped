@@ -44,22 +44,22 @@ async function bootstrap() {
 You can define a default scope(scopes) for an entity adding the `@DefaultScopes({ ... })` decorator before the `@Entity()`.
 
 ```typescript
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
-import { Scopes, DefaultScopes } from "typeorm-scoped"
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm"
+import {Scopes, DefaultScopes} from "typeorm-scoped"
 
 @DefaultScopes<User>({
   existed: (qb, alias) => qb.andWhere(`${alias}.deletedAt IS NULL`),
   ...
 })
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column()
   name: string
 
-  @Column()
+  @Column({nullable: true})
   deletedAt?: Date
 }
 ```
@@ -92,17 +92,18 @@ WHERE "User"."name" = ? AND "User"."deletedAt" IS NULL
 To define a scope(scopes) for an entity you need to add the `@Scopes({ ... })` decorator before the `@Entity()`.
 
 ```typescript
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
-import { Scopes, DefaultScopes } from "typeorm-scoped"
+import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"
+import {Scopes, DefaultScopes} from "typeorm-scoped"
+import {ScopeEntity} from "./scope.entity";
 
-@Scopes<User>({ 
-  females։ (qb, alias) => qb.andWhere(`${alias}.gender = :g`, { g: "Female" }),
-  adultUsers։ (qb, alias) => qb.andWhere(`${alias}.age > :adultAge`, { adultAge: 17 }),
+@Scopes<User>({
+  females: (qb, alias) => qb.andWhere(`${alias}.gender = :g`, {g: "Female"}),
+  adultUsers: (qb, alias) => qb.andWhere(`${alias}.age > :adultAge`, {adultAge: 17}),
   ...
 })
 // You can also use @Scopes(...) @DefaultScopes(...) together !
 @Entity()
-export class User {
+export class User extends ScopeEntity {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -115,7 +116,7 @@ export class User {
   @Column()
   gender: string // or GenderEnum -> "Male", "Female", ...
 
-  @Column()
+  @Column({ nullable: true })
   deletedAt?: Date
 }
 ```
@@ -129,11 +130,6 @@ If You use `Data Mapper(Repository)` pattern, then for custom scopes You should 
 export class UserRepository extends ScopeRepository<User> { // <-- our ScopeRepository already extends from Repository<Entity>
   ...
 }
-```
-or
-```typescript
-@InjectRepository(User)
-private readonly accountRepo: ScopeRepository<User> // <-- our ScopeRepository already extends from Repository<Entity>
 ```
 
 ### Active Record Pattern
