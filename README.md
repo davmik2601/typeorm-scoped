@@ -121,6 +121,20 @@ export class User extends ScopeEntity {
 }
 ```
 
+### Active Record Pattern
+
+If you use `Active Record` pattern, you need to extend from `ScopeEntity`:
+
+```typescript
+@Scopes<User>({ 
+  ...
+})
+@Entity()
+export class User extends ScopeEntity { // <-- our ScopeEntity already extends from BaseEntity
+  ...
+}
+```
+
 ### Data Mapper (Repository) Pattern
 
 If you use `Data Mapper(Repository)` pattern, then for custom scopes you should use Custom Repositories, which should be `extends` from `ScopeRepository`:
@@ -153,21 +167,6 @@ constructor(
   ...
   private readonly userRepository: UserRepository
 ) {}
-```
-
-
-### Active Record Pattern
-
-If you use `Active Record` pattern, you need to extend from `ScopeEntity`:
-
-```typescript
-@Scopes<User>({ 
-  ...
-})
-@Entity()
-export class User extends ScopeEntity { // <-- our ScopeEntity already extends from BaseEntity
-  ...
-}
 ```
 
 ### Querying
