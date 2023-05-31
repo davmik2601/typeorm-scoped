@@ -1,5 +1,5 @@
-import { getMetadataArgsStorage } from 'typeorm';
-import { ScopedTableMetadata, ScopeObjectKeys } from './scope-types';
+import {getMetadataArgsStorage} from 'typeorm';
+import {ScopedTableMetadata, ScopeObjectKeys} from './scope-types';
 
 export function DefaultScopes<T>(defaultScopes: ScopeObjectKeys<T>) {
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -10,7 +10,7 @@ export function DefaultScopes<T>(defaultScopes: ScopeObjectKeys<T>) {
     if (table) {
       table.defaultScopes = {};
       Object.entries(defaultScopes).forEach(([key, scopeFunc]) => {
-        table.defaultScopes[key] = { scopeFunc, enabled: true };
+        table.defaultScopes[key] = {scopeFunc, enabled: true};
       });
     } else {
       throw new Error(
@@ -29,7 +29,7 @@ export function Scopes<T>(scopes: ScopeObjectKeys<T>) {
     if (table) {
       table.scopes = {};
       Object.entries(scopes).forEach(([key, scopeFunc]) => {
-        table.scopes[key] = { scopeFunc, enabled: false };
+        table.scopes[key] = {scopeFunc, enabled: false};
       });
     } else {
       throw new Error(

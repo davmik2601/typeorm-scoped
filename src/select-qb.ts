@@ -1,5 +1,5 @@
-import { ObjectLiteral, SelectQueryBuilder } from 'typeorm';
-import { ScopedTableMetadata } from './scope-types';
+import {ObjectLiteral, SelectQueryBuilder} from 'typeorm';
+import {ScopedTableMetadata} from './scope-types';
 
 export const GET_QUERY_COPY = '___scope_getQuery_copy___';
 

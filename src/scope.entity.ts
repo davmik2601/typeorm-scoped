@@ -1,4 +1,4 @@
-import { BaseEntity, getMetadataArgsStorage } from 'typeorm';
+import {BaseEntity, getMetadataArgsStorage} from 'typeorm';
 import {ScopedTableMetadata} from "./scope-types";
 
 export abstract class ScopeEntity extends BaseEntity {
