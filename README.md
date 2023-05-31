@@ -2,7 +2,7 @@
 
 ## Description
 
-✅ This lib supports Scopes and for both `Active Record pattern` (working with Entitiies), and `Data Mapper pattern` (
+✅ This lib supports Scopes for both `Active Record pattern` (working with Entitiies), and `Data Mapper pattern` (
 working with Repositories).
 
 It's very easy to use this lib.
