@@ -151,7 +151,6 @@ After that don't forget to add in services Inject Repository:
 ```typescript
 constructor(
   ...
-  @InjectRepository(UserRepository)
   private readonly userRepository: UserRepository
 ) {}
 ```
