@@ -1,6 +1,6 @@
 {
   "name": "typeorm-scoped",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "license": "ISC",
   "description": "TypeORM extension which adds scopes and default scopes to entities and repositories.",
   "scripts": {
