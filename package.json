@@ -46,7 +46,7 @@
     "typescript": "^4.0.2"
   },
   "peerDependencies": {
-    "typeorm": "^0.2.45"
+    "typeorm": "<=0.2.45"
   },
   "jest": {
     "moduleFileExtensions": [

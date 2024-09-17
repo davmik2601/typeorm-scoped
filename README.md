@@ -18,29 +18,29 @@ npm install typeorm-scoped --save
 
 ## Initialization (Global Setup for Project)
 
-Before usage you need to patch TypeORM before calling any database method.
+Before usage, you need to patch TypeORM before calling any database method.
 
 ```typescript
-import {patchSelectQueryBuilder} from 'typeorm-scope'
+import {patchSelectQueryBuilder} from 'typeorm-scoped';
 
 ...
-patchSelectQueryBuilder()  // <-- call this function
+patchSelectQueryBuilder(); // <-- call this function
 ...
-const app = new Koa() // or const app = express() ...
+const app = new Koa(); // or const app = express() ...
 ```
 
 In `NestJS` you can call this function in `main.ts`, in `bootstrap()` function before creating app.
 
 ```typescript
-import {patchSelectQueryBuilder} from 'typeorm-scoped'
+import {patchSelectQueryBuilder} from 'typeorm-scoped';
 
 ...
 
 async function bootstrap() {
-  patchSelectQueryBuilder() // <-- call
-...
-  const app = await NestFactory.create(AppModule, {...})
-...
+  patchSelectQueryBuilder(); // <-- call
+  ...
+  const app = await NestFactory.create(AppModule, {...});
+  ...
 ```
 
 ## Default Scopes
@@ -59,13 +59,13 @@ import {Scopes, DefaultScopes} from "typeorm-scoped"
 @Entity()
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column({nullable: true})
-  deletedAt?: Date
+  deletedAt?: Date;
 }
 ```
 
@@ -76,11 +76,11 @@ the `EntityManager` or any `Repository` or `CustomRepository` and the `default s
 the resulting query. It will also work with queries created using the `QueryBuilder`. For example, the following snippet
 
 ```typescript
-User.find({where: {name: "John"}})
+User.find({where: {name: "John"}});
 
 // or
 
-userRepository.find({where: {name: "John"}})
+userRepository.find({where: {name: "John"}});
 
 // or with createQueryBuilder() ...
 ```
@@ -99,8 +99,8 @@ WHERE "User"."name" = ? AND "User"."deletedAt" IS NULL
 To define a scope(scopes) for an entity you need to add the `@Scopes({ ... })` decorator before the `@Entity()`.
 
 ```typescript
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm"
-import {Scopes, DefaultScopes} from "typeorm-scoped"
+import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Scopes, DefaultScopes} from "typeorm-scoped";
 import {ScopeEntity} from "./scope.entity";
 
 @Scopes<User>({
@@ -112,19 +112,19 @@ import {ScopeEntity} from "./scope.entity";
 @Entity()
 export class User extends ScopeEntity {
   @PrimaryGeneratedColumn()
-  id: number
+  id: number;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
-  age: number
+  age: number;
 
   @Column()
-  gender: string // or GenderEnum -> "Male", "Female", ...
+  gender: string; // or GenderEnum -> "Male", "Female", ...
 
   @Column({nullable: true})
-  deletedAt?: Date
+  deletedAt?: Date;
 }
 ```
 
@@ -138,7 +138,7 @@ If you use `Active Record` pattern, you need to extend from `ScopeEntity`:
 })
 @Entity()
 export class User extends ScopeEntity { // <-- our ScopeEntity already extends from BaseEntity
-...
+  ...
 }
 ```
 
@@ -152,7 +152,7 @@ be `extends` from `ScopeRepository`:
 ```typescript
 @EntityRepository(User)
 export class UserRepository extends ScopeRepository<User> { // <-- our ScopeRepository already extends from Repository<Entity>
-...
+  ...
 }
 ```
 
@@ -177,13 +177,9 @@ After that use it in services:
 
 ```typescript
 constructor(
+  private readonly userRepository: UserRepository,
   ...
-    private
-readonly
-userRepository: UserRepository
-)
-{
-}
+){}
 ```
 
 ### Querying
@@ -191,11 +187,11 @@ userRepository: UserRepository
 You will use custom scopes like this:
 
 ```typescript
-userRepository.scoped("females", "adultUsers").find({where: {name: "John"}})
+userRepository.scoped("females", "adultUsers").find({where: {name: "John"}});
 
 // or
 
-User.scoped("females", "adultUsers").find({where: {name: "John"}})
+User.scoped("females", "adultUsers").find({where: {name: "John"}});
 
 // or with createQueryBuilder() ...
 ```
@@ -215,14 +211,14 @@ You are able to disable `default scopes` by calling a method `unscoped`.
 
 ```typescript
 // if you dont send parametrs to unscoped method, it unscoped all default scopes  !!!
-userRepository.unscoped().find({where: {name: "John"}})
+userRepository.unscoped().find({where: {name: "John"}});
 
 // or unscope only specific default scopes
-userRepository.unscoped("existed").find({where: {name: "John"}})
+userRepository.unscoped("existed").find({where: {name: "John"}});
 
 // or
 
-User.unscoped().find({where: {name: "John"}})
+User.unscoped().find({where: {name: "John"}});
 ...
 
 // or with createQueryBuilder() ...
@@ -232,7 +228,7 @@ User.unscoped().find({where: {name: "John"}})
 You can also continue with scoped() method, like this:
 
 ```typescript
-userRepository.unscoped("existed").scoped("females").find({where: {name: "John"}})
+userRepository.unscoped("existed").scoped("females").find({where: {name: "John"}});
 ```
 
 ---
