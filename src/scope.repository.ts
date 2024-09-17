@@ -1,7 +1,7 @@
 import {ObjectLiteral, Repository} from "typeorm";
 import {ScopedTableMetadata} from "./scope-types";
 
-export abstract class ScopeRepository<T extends ObjectLiteral> extends Repository<T> {
+export class ScopeRepository<T extends ObjectLiteral> extends Repository<T> {
   scoped(...scopes: string[]) {
     scopes = [...new Set(scopes)];
     const metadata = this.metadata.tableMetadataArgs as

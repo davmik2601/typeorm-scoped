@@ -1,7 +1,7 @@
 import {BaseEntity, getMetadataArgsStorage} from 'typeorm';
 import {ScopedTableMetadata} from "./scope-types";
 
-export abstract class ScopeEntity extends BaseEntity {
+export class ScopeEntity extends BaseEntity {
   static scoped<T extends typeof BaseEntity>(this: T, ...scopes: string[]): T {
     scopes = [...new Set(scopes)];
     const table = getMetadataArgsStorage().tables.find(
