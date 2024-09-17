@@ -7,7 +7,7 @@ export abstract class ScopeRepository<T extends ObjectLiteral> extends Repositor
     const metadata = this.metadata.tableMetadataArgs as
       | ScopedTableMetadata<T>
       | undefined;
-    if (metadata?.scopes) {
+    if (metadata && metadata.scopes) {
       for (const scopeName of scopes) {
         if (metadata.scopes[scopeName]) {
           metadata.scopes[scopeName].enabled = true;
@@ -21,7 +21,7 @@ export abstract class ScopeRepository<T extends ObjectLiteral> extends Repositor
     const metadata = this.metadata.tableMetadataArgs as
       | ScopedTableMetadata<T>
       | undefined;
-    if (metadata?.defaultScopes) {
+    if (metadata && metadata.defaultScopes) {
       for (const key in metadata.defaultScopes) {
         if (!defaultScopes.length) {
           if (metadata.defaultScopes[key]) {

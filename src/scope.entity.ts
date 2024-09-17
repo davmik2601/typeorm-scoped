@@ -7,7 +7,7 @@ export abstract class ScopeEntity extends BaseEntity {
     const table = getMetadataArgsStorage().tables.find(
       (table) => table.target === this.target,
     ) as ScopedTableMetadata<T> | undefined;
-    if (table?.scopes) {
+    if (table && table.scopes) {
       for (const scopeName of scopes) {
         if (table.scopes[scopeName]) {
           table.scopes[scopeName].enabled = true;
