@@ -1,5 +1,5 @@
-import {BaseEntity, getMetadataArgsStorage} from 'typeorm';
-import {ScopedTableMetadata} from "./scope-types";
+import { BaseEntity, getMetadataArgsStorage } from 'typeorm';
+import { ScopedTableMetadata } from './scope-types';
 
 export class ScopeEntity extends BaseEntity {
   static scoped<T extends typeof BaseEntity>(this: T, ...scopes: string[]): T {

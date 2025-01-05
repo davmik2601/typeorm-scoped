@@ -1,5 +1,5 @@
-import {SelectQueryBuilder} from 'typeorm';
-import {TableMetadataArgs} from 'typeorm/metadata-args/TableMetadataArgs';
+import { SelectQueryBuilder } from 'typeorm';
+import { TableMetadataArgs } from 'typeorm/metadata-args/TableMetadataArgs';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class ScopeObjectKeys<T> {

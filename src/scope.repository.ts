@@ -1,5 +1,5 @@
-import {ObjectLiteral, Repository} from "typeorm";
-import {ScopedTableMetadata} from "./scope-types";
+import { ObjectLiteral, Repository } from 'typeorm';
+import { ScopedTableMetadata } from './scope-types';
 
 export class ScopeRepository<T extends ObjectLiteral> extends Repository<T> {
   scoped(...scopes: string[]) {

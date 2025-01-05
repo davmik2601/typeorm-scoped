@@ -1,5 +1,5 @@
-import {SelectQueryBuilder} from 'typeorm';
-import {GET_QUERY_COPY, SelectQB} from './select-qb';
+import { SelectQueryBuilder } from 'typeorm';
+import { GET_QUERY_COPY, SelectQB } from './select-qb';
 
 export const patchSelectQueryBuilder = (): void => {
   if (SelectQueryBuilder.prototype[GET_QUERY_COPY]) {

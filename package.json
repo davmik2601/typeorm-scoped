@@ -1,12 +1,12 @@
 {
   "name": "typeorm-scoped",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "license": "ISC",
   "description": "TypeORM extension which adds scopes and default scopes to entities and repositories.",
   "scripts": {
-    "dev": "nodemon -w 'src/**/*' --ignore 'src/**/*.spec.ts' -e ts -x 'yarn build'",
+    "dev": "nodemon -w 'src/**/*' --ignore 'src/**/*.spec.ts' -e ts -x 'npm run build'",
     "build": "rimraf dist && tsc",
-    "prepublish": "yarn build"
+    "prepublish": "npm run build"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,22 +31,25 @@
     "package.json",
     "README.md"
   ],
-  "dependencies": {},
+  "peerDependencies": {
+    "typeorm": "<=0.3.20"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.0",
     "@types/node": "^16.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "babel-jest": "^27.0.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.0",
     "core-js": "^3.4.8",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "jest": "^27.0.0",
     "nodemon": "^2.0.1",
     "pg": "^8.0.0",
-    "prettier": "^2.0.1",
-    "typeorm": "^0.2.45",
-    "typescript": "^4.0.2"
-  },
-  "peerDependencies": {
-    "typeorm": "<=0.2.45"
+    "prettier": "^3.4.2",
+    "typescript": "^5.1.3"
   },
   "jest": {
     "moduleFileExtensions": [
