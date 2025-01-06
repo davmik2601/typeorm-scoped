@@ -35,8 +35,12 @@ export function Scopes<T>(scopes: ScopeObjectKeys<T>) {
       table.scopes = {};
       Object.entries(scopes).forEach(([key, scopeFunc]) => {
         table.scopes[key] = {
-          scopeFunc: (qb: SelectQueryBuilder<T>, alias: string) => {
-            return scopeFunc(qb, alias);
+          scopeFunc: (
+            qb: SelectQueryBuilder<T>,
+            alias: string,
+            context: Record<string, any>,
+          ) => {
+            return scopeFunc(qb, alias, context);
           },
           enabled: false,
         };

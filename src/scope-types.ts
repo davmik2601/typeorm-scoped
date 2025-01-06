@@ -10,12 +10,14 @@ export class ScopeObjectKeys<T> {
 export type ScopeQB<T> = (
   qb: SelectQueryBuilder<T>,
   alias: string,
+  context?: Record<string, any>,
 ) => SelectQueryBuilder<T>;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export class ScopeObject<T> {
   scopeFunc: ScopeQB<T>;
   enabled: boolean;
+  context?: Record<string, any>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

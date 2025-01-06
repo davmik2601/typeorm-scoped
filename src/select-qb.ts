@@ -30,7 +30,7 @@ export class SelectQB<T extends ObjectLiteral> extends SelectQueryBuilder<T> {
       if (metadata.scopes) {
         for (const scopeObj of Object.values(metadata.scopes)) {
           if (scopeObj.enabled) {
-            scopeObj.scopeFunc(this, table.name);
+            scopeObj.scopeFunc(this, table.name, scopeObj.context || {});
             scopeObj.enabled = false;
           }
         }

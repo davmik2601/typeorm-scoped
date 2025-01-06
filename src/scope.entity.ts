@@ -2,16 +2,24 @@ import { BaseEntity, getMetadataArgsStorage } from 'typeorm';
 import { ScopedTableMetadata } from './scope-types';
 
 export class ScopeEntity extends BaseEntity {
-  static scoped<T extends typeof BaseEntity>(this: T, ...scopes: string[]): T {
-    scopes = [...new Set(scopes)];
+  static scoped<T extends typeof BaseEntity>(
+    this: T,
+    scope: string,
+    context: Record<string, any> = {},
+  ): T {
+    // scopes = [...new Set(scopes)];
     const table = getMetadataArgsStorage().tables.find(
       (table) => table.target === this.target,
     ) as ScopedTableMetadata<T> | undefined;
     if (table && table.scopes) {
-      for (const scopeName of scopes) {
-        if (table.scopes[scopeName]) {
-          table.scopes[scopeName].enabled = true;
-        }
+      // for (const scopeName of scopes) {
+      //   if (table.scopes[scopeName]) {
+      //     table.scopes[scopeName].enabled = true;
+      //   }
+      // }
+      if (table.scopes[scope]) {
+        table.scopes[scope].enabled = true;
+        table.scopes[scope].context = context;
       }
     }
     return this;

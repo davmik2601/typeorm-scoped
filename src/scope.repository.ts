@@ -2,16 +2,20 @@ import { ObjectLiteral, Repository } from 'typeorm';
 import { ScopedTableMetadata } from './scope-types';
 
 export class ScopeRepository<T extends ObjectLiteral> extends Repository<T> {
-  scoped(...scopes: string[]) {
-    scopes = [...new Set(scopes)];
+  scoped(scope: string, context?: Record<string, any>) {
+    // scopes = [...new Set(scopes)];
     const metadata = this.metadata.tableMetadataArgs as
       | ScopedTableMetadata<T>
       | undefined;
     if (metadata && metadata.scopes) {
-      for (const scopeName of scopes) {
-        if (metadata.scopes[scopeName]) {
-          metadata.scopes[scopeName].enabled = true;
-        }
+      // for (const scopeName of scopes) {
+      //   if (metadata.scopes[scopeName]) {
+      //     metadata.scopes[scopeName].enabled = true;
+      //   }
+      // }
+      if (metadata.scopes[scope]) {
+        metadata.scopes[scope].enabled = true;
+        metadata.scopes[scope].context = context;
       }
     }
     return this;

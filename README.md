@@ -105,7 +105,7 @@ import {ScopeEntity} from "./scope.entity";
 
 @Scopes<User>({
   females: (qb, alias) => qb.andWhere(`${alias}.gender = :g`, {g: "Female"}),
-  adultUsers: (qb, alias) => qb.andWhere(`${alias}.age > :adultAge`, {adultAge: 17}),
+  adultUsers: (qb, alias, context) => qb.andWhere(`${alias}.age >= :adultAge`, {adultAge: context.adultAge || 18}),
   ...
 })
 // You can also use @Scopes(...) and @DefaultScopes(...) together !
@@ -187,11 +187,11 @@ constructor(
 You will use custom scopes like this:
 
 ```typescript
-userRepository.scoped("females", "adultUsers").find({where: {name: "John"}});
+userRepository.scoped("females").scoped("adultUsers", {adultAge: 20}).find({where: {name: "John"}});
 
 // or
 
-User.scoped("females", "adultUsers").find({where: {name: "John"}});
+User.scoped("females").scoped("adultUsers", {adultAge: 20}).find({where: {name: "John"}});
 
 // or with createQueryBuilder() ...
 ```
@@ -201,8 +201,8 @@ will produce an SQL query like
 ```sql
 SELECT "User"."id" AS "User_id", "User"."name" AS "User_name", "User"."age" AS "User_age", "User"."gender" AS "User_gender" 
 FROM "user" "User" 
-WHERE "User"."gender" = ? AND "User"."age" > ? AND "User"."name" = ?
--- PARAMETERS: ["Female", 17, "John"]
+WHERE "User"."gender" = ? AND "User"."age" >= ? AND "User"."name" = ?
+-- PARAMETERS: ["Female", 20, "John"]
 ```
 
 ## Disabling Default Scopes
