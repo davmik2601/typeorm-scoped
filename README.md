@@ -233,3 +233,4 @@ userRepository.unscoped("existed").scoped("females").find({where: {name: "John"}
 
 ---
 
+

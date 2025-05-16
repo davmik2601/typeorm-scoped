@@ -2,25 +2,33 @@
   "name": "typeorm-scoped",
   "version": "1.2.1",
   "license": "ISC",
-  "description": "TypeORM extension which adds scopes and default scopes to entities and repositories.",
+  "description": "TypeORM extension that adds scopes and default scopes to entities and repositories, supporting both Active Record and Data Mapper patterns.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "nodemon -w 'src/**/*' --ignore 'src/**/*.spec.ts' -e ts -x 'npm run build'",
     "build": "rimraf dist && tsc",
     "prepublish": "npm run build"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davmik2601/typeorm-scoped.git"
+    "url": "https://github.com/davmik2601/typeorm-scoped"
+  },
+  "homepage": "https://github.com/davmik2601/typeorm-scoped#readme",
+  "bugs": {
+    "url": "https://github.com/davmik2601/typeorm-scoped/issues"
   },
   "keywords": [
     "typeorm",
-    "scope",
-    "scoped",
-    "scopes",
+    "typeorm plugin",
+    "typeorm scopes",
+    "typeorm default scope",
+    "active record typeorm",
+    "data mapper typeorm",
     "nestjs",
-    "default-scopes"
+    "typeorm-scoped",
+    "entity scopes",
+    "typeorm repository scope"
   ],
   "author": {
     "name": "David Mikayelyan",
