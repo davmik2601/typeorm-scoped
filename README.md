@@ -1,5 +1,7 @@
 # typeorm-scoped
 
+> 🟢 Original typeorm-scoped package for TypeORM scops.
+
 ## Description
 
 ✅ This lib supports Scopes for both `Active Record pattern` (working with Entitiies), and `Data Mapper pattern` (
