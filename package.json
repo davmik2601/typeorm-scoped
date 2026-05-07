@@ -1,6 +1,6 @@
 {
   "name": "typeorm-scoped",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "license": "ISC",
   "description": "TypeORM extension that adds scopes and default scopes to entities and repositories, supporting both Active Record and Data Mapper patterns.",
   "main": "dist/index.js",
