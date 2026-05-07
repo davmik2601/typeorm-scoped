@@ -1,4 +1,5 @@
 import { BaseEntity, getMetadataArgsStorage } from 'typeorm';
+import { resolveDefaultScopesInheritance } from './default-scope-inheritance';
 import { ScopedTableMetadata } from './scope-types';
 
 export class ScopeEntity extends BaseEntity {
@@ -32,18 +33,19 @@ export class ScopeEntity extends BaseEntity {
     const table = getMetadataArgsStorage().tables.find(
       (table) => table.target === this.target,
     ) as ScopedTableMetadata<T>;
-    if (table.defaultScopes) {
-      for (const key in table.defaultScopes) {
+    const resolvedDefaultScopes = resolveDefaultScopesInheritance(table);
+    if (resolvedDefaultScopes) {
+      for (const key in resolvedDefaultScopes) {
         if (!defaultScopes.length) {
-          if (table.defaultScopes[key]) {
-            table.defaultScopes[key].enabled = false;
+          if (resolvedDefaultScopes[key]) {
+            resolvedDefaultScopes[key].enabled = false;
           }
         } else {
           const scopeSet = new Set(defaultScopes);
           // if the key is in the scopeSet, set enabled to false
           if (scopeSet.has(key)) {
-            if (table.defaultScopes[key]) {
-              table.defaultScopes[key].enabled = false;
+            if (resolvedDefaultScopes[key]) {
+              resolvedDefaultScopes[key].enabled = false;
             }
           }
         }

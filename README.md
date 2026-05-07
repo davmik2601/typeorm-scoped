@@ -50,6 +50,9 @@ async function bootstrap() {
 you can define a default scope(scopes) for an entity adding the `@DefaultScopes({ ... })` decorator before
 the `@Entity()`.
 
+Default scopes are also inherited from base/abstract entities. If a child entity defines a default scope with the
+same key, the child definition overrides the inherited one.
+
 ```typescript
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm"
 import {Scopes, DefaultScopes} from "typeorm-scoped"
