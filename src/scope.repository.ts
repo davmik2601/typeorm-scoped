@@ -1,4 +1,5 @@
 import { ObjectLiteral, Repository } from 'typeorm';
+import { resolveDefaultScopesInheritance } from './default-scope-inheritance';
 import { ScopedTableMetadata } from './scope-types';
 
 export class ScopeRepository<T extends ObjectLiteral> extends Repository<T> {
@@ -25,18 +26,19 @@ export class ScopeRepository<T extends ObjectLiteral> extends Repository<T> {
     const metadata = this.metadata.tableMetadataArgs as
       | ScopedTableMetadata<T>
       | undefined;
-    if (metadata && metadata.defaultScopes) {
-      for (const key in metadata.defaultScopes) {
+    const resolvedDefaultScopes = resolveDefaultScopesInheritance(metadata);
+    if (resolvedDefaultScopes) {
+      for (const key in resolvedDefaultScopes) {
         if (!defaultScopes.length) {
-          if (metadata.defaultScopes[key]) {
-            metadata.defaultScopes[key].enabled = false;
+          if (resolvedDefaultScopes[key]) {
+            resolvedDefaultScopes[key].enabled = false;
           }
         } else {
           const scopeSet = new Set(defaultScopes);
           // if the key is in the scopeSet, set enabled to false
           if (scopeSet.has(key)) {
-            if (metadata.defaultScopes[key]) {
-              metadata.defaultScopes[key].enabled = false;
+            if (resolvedDefaultScopes[key]) {
+              resolvedDefaultScopes[key].enabled = false;
             }
           }
         }
