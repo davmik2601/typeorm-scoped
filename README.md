@@ -47,7 +47,7 @@ async function bootstrap() {
 
 ## Default Scopes
 
-you can define a default scope(scopes) for an entity adding the `@DefaultScopes({ ... })` decorator before
+You can define a default scope(s) for an entity adding the `@DefaultScopes({ ... })` decorator before
 the `@Entity()`.
 
 Default scopes are also inherited from base/abstract entities. If a child entity defines a default scope with the
@@ -82,9 +82,7 @@ the resulting query. It will also work with queries created using the `QueryBuil
 
 ```typescript
 User.find({where: {name: "John"}});
-
 // or
-
 userRepository.find({where: {name: "John"}});
 
 // or with createQueryBuilder() ...
@@ -101,7 +99,7 @@ WHERE "User"."name" = ? AND "User"."deletedAt" IS NULL
 
 ## Custom Scopes
 
-To define a scope(scopes) for an entity you need to add the `@Scopes({ ... })` decorator before the `@Entity()`.
+To define a scope(s) for an entity you need to add the `@Scopes({ ... })` decorator before the `@Entity()`.
 
 ```typescript
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
@@ -193,9 +191,7 @@ You will use custom scopes like this:
 
 ```typescript
 userRepository.scoped("females").scoped("adultUsers", {adultAge: 20}).find({where: {name: "John"}});
-
 // or
-
 User.scoped("females").scoped("adultUsers", {adultAge: 20}).find({where: {name: "John"}});
 
 // or with createQueryBuilder() ...
@@ -222,7 +218,6 @@ userRepository.unscoped().find({where: {name: "John"}});
 userRepository.unscoped("existed").find({where: {name: "John"}});
 
 // or
-
 User.unscoped().find({where: {name: "John"}});
 ...
 
